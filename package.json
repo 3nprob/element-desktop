@@ -88,9 +88,6 @@
     "matrix-seshat": "^2.3.3",
     "keytar": "^7.9.0"
   },
-  "resolutions": {
-    "@types/node": "16.11.38"
-  },
   "build": {
     "appId": "im.riot.app",
     "asarUnpack": "**/*.node",
