@@ -94,7 +94,6 @@ try {
 // async to are initialised in setupGlobals()
 let asarPath: string;
 let resPath: string;
-let iconPath: string;
 
 let vectorConfig: Record<string, any>;
 let trayConfig: {
@@ -241,8 +240,8 @@ async function setupGlobals(): Promise<void> {
 
     // The tray icon
     // It's important to call `path.join` so we don't end up with the packaged asar in the final path.
-    const iconFile = `element.${process.platform === 'win32' ? 'ico' : 'png'}`;
-    iconPath = path.join(resPath, "img", iconFile);
+    const iconPath = vectorConfig.tray_icon_path ||
+      path.join(resPath, "img", `element.${process.platform === 'win32' ? 'ico' : 'png'}`);
     trayConfig = {
         icon_path: iconPath,
         brand: vectorConfig.brand || 'Element',
@@ -1000,7 +999,7 @@ app.on('ready', async () => {
         // https://www.electronjs.org/docs/faq#the-font-looks-blurry-what-is-this-and-what-can-i-do
         backgroundColor: '#fff',
 
-        icon: iconPath,
+        icon: trayConfig.icon_path,
         show: false,
         autoHideMenuBar: store.get('autoHideMenuBar', true),
 
